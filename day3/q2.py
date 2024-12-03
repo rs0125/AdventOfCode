@@ -1,16 +1,6 @@
 import re
-lines = open("input.txt", "r").read()
-
-def findkumar(l):
-    x = re.findall("mul\([0-9]*,[0-9]*\)", l)
-
-
-inact = "don't()"
-act = "do()"
-print(lines.index(act))
-print(lines.index("don't()"))
-
-
-z = re.findall("don't\(\).*do\(\)", lines)
-
-print(z)
+x = re.findall("mul\([0-9]*,[0-9]*\)", ''.join(re.findall(r"do\(\)(?:(?!don't\(\)).)*", "do()" + open("input.txt", "r").read() + "don't()", re.DOTALL)))
+kumar = 0
+for i in x:
+    kumar += int((i[4:len(i)-1]).split(',')[0]) * int((i[4:len(i)-1]).split(',')[1])
+print(kumar)
